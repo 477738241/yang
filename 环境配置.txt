@@ -21,9 +21,8 @@ redis_session_password: '',
 
 
 本地调式
-第一步
-npm install -g cnpm
-第二步
-cnpm install
+安装模块
+npm install
+
 在enjoys文件夹内启动服务
 node ./bin/www
