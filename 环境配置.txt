@@ -1,0 +1,29 @@
+﻿创建mysql
+
+用户名：root
+密码：asd123
+数据库名：enjoy
+地址：127.0.0.1
+端口：3306
+
+mysql_db: 'enjoy',
+mysql_userid: 'root',
+mysql_password: 'asd123',
+mysql_host: '127.0.0.1',
+mysql_port: '3306',
+
+创建redis数据库
+
+redis_host: "127.0.0.1",
+redis_port: 6379,
+redis_session_db: 1,
+redis_session_password: '',
+
+
+本地调式
+第一步
+npm install -g cnpm
+第二步
+cnpm install
+在enjoys文件夹内启动服务
+node ./bin/www
