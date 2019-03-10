@@ -1,0 +1,28 @@
+{
+  "name": "egxservers",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www --exex babel-node --debug"
+  },
+  "dependencies": {
+    "async": "~2.6.1",
+    "bluebird": "~3.5.2",
+    "body-parser-xml": "^1.1.0",
+    "connect-redis": "~3.4.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.0",
+    "express-session": "~1.15.6",
+    "fast-xml-parser": "^3.12.13",
+    "http": "~0.0.0",
+    "http-errors": "~1.6.2",
+    "log4js": "~3.0.6",
+    "morgan": "~1.9.0",
+    "mysql": "~2.16.0",
+    "request": "~2.88.0",
+    "sha1": "^1.1.1",
+	"body-parser":"~1.18.3"
+  }
+}
