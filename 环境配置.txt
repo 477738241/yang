@@ -26,3 +26,8 @@ npm install
 
 在enjoys文件夹内启动服务
 node ./bin/www
+
+config.js
+
+enjoyPath: 'http://127.0.0.1:8088',//访问地址
+port: "8088",//访问端口
