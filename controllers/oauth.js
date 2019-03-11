@@ -220,10 +220,14 @@ class oAuth {
         req.body.createtime = Util.getNowTime();
         req.body.out_trade_no = Util.getTimeStamp(req.body.createtime) + "" + req.body.userid;
         let cbData = await getSql.user_buy_commodity(req.body);
+        let orede = {
+            out_trade_no: req.body.out_trade_no,
+            total_fee: req.body.total_fee
+        }
         pager = {
             code: cbData.status,
             message: cbData.message,
-            data: []
+            data:orede
         }
         return res.json(pager);
     }
@@ -237,12 +241,12 @@ class oAuth {
                 let nowtime = Util.getNewTime(new Date());
                 let total_fee = Number(req.body.xml.total_fee) / 100;
                 //签名
-                let stringB = "appid=" + req.body.xml.appid + "&bank_type=" + req.body.xml.bank_type + "&cash_fee=" + req.body.xml.cash_fee + "&fee_type=" + req.body.xml.fee_type + "&is_subscribe=" + req.body.xml.is_subscribe + "&mch_id=" + req.body.xml.mch_id + "&nonce_str=" + req.body.xml.nonce_str + "&openid=" + req.body.xml.openid + "&out_trade_no=" + req.body.xml.out_trade_no + "&result_code=" + req.body.xml.result_code + "&return_code=" + req.body.xml.return_code + "&time_end=" + req.body.xml.time_end + "&total_fee=" + req.body.xml.total_fee + "&trade_type=" + req.body.xml.trade_type + "&transaction_id=" + req.body.xml.transaction_id;
-                // // 第二步：拼接API密钥：
-                let stringSignTempb = stringB + "&key=" + config.key  //注：key为商户平台设置的密钥key 
-                let signb = crypto.createHash('md5').update(stringSignTempb).digest('hex').toUpperCase();
-                //回调成功后修改订单状态
-                if (req.body.xml.sign == signb) {
+                // let stringB = "appid=" + req.body.xml.appid + "&bank_type=" + req.body.xml.bank_type + "&cash_fee=" + req.body.xml.cash_fee + "&fee_type=" + req.body.xml.fee_type + "&is_subscribe=" + req.body.xml.is_subscribe + "&mch_id=" + req.body.xml.mch_id + "&nonce_str=" + req.body.xml.nonce_str + "&openid=" + req.body.xml.openid + "&out_trade_no=" + req.body.xml.out_trade_no + "&result_code=" + req.body.xml.result_code + "&return_code=" + req.body.xml.return_code + "&time_end=" + req.body.xml.time_end + "&total_fee=" + req.body.xml.total_fee + "&trade_type=" + req.body.xml.trade_type + "&transaction_id=" + req.body.xml.transaction_id;
+                // // // 第二步：拼接API密钥：
+                // let stringSignTempb = stringB + "&key=" + config.key  //注：key为商户平台设置的密钥key 
+                // let signb = crypto.createHash('md5').update(stringSignTempb).digest('hex').toUpperCase();
+                // //回调成功后修改订单状态
+                // if (req.body.xml.sign == signb) {
                     let datas = {
                         total_fee: total_fee,
                         out_trade_no: req.body.xml.out_trade_no,
@@ -259,21 +263,21 @@ class oAuth {
                         let str = "<xml><return_code><![CDATA[FAIL]]></return_code>";
                         return res.send(str);
                     }
-                }
-                else {
-                    let datas = {
-                        total_fee: total_fee,
-                        out_trade_no: req.body.xml.out_trade_no,
-                        status: 1,
-                        pay_status: 1,
-                        state: 0
-                    }
-                    let DbData = await getSql.user_wechat_result(datas);
-                    if (DbData.status == 200) {
-                        let str = "<xml><return_code><![CDATA[FAIL]]></return_code>";
-                        return res.send(str);
-                    }
-                }
+                // }
+                // else {
+                //     let datas = {
+                //         total_fee: total_fee,
+                //         out_trade_no: req.body.xml.out_trade_no,
+                //         status: 1,
+                //         pay_status: 1,
+                //         state: 0
+                //     }
+                //     let DbData = await getSql.user_wechat_result(datas);
+                //     if (DbData.status == 200) {
+                //         let str = "<xml><return_code><![CDATA[FAIL]]></return_code>";
+                //         return res.send(str);
+                //     }
+                // }
 
             }
             else {

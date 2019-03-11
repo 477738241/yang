@@ -66,8 +66,8 @@ class getIndexSql {
         let { total_fee, out_trade_no, pay_status, status, state } = obj;
         try {
             let sql1 = "update wx_payorder set status = " + pay_status + ",total_pay=" + total_fee + " where out_trade_no='" + out_trade_no + "' ";
-            let sql2 = "update user_recharge set status =" + status + ",state=" + state + " where out_trade_no='" + out_trade_no + "' ";
-            return await getAffair(sql1, sql2);
+            let sql2 = "update user_recharge set status =" + status + " where out_trade_no='" + out_trade_no + "' ";
+            return await getAffair([sql1, sql2]);
         } catch (e) {
             console.log(e);
         }
